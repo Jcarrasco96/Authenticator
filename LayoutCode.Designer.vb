@@ -26,9 +26,9 @@ Partial Class LayoutCode
         Me.lblCode = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnDelete = New Authenticator.MysticButton()
-        Me.btnQr = New Authenticator.MysticButton()
         Me.btnEdit = New Authenticator.MysticButton()
+        Me.btnQr = New Authenticator.MysticButton()
+        Me.btnDelete = New Authenticator.MysticButton()
         Me.SuspendLayout()
         '
         'lblCode
@@ -51,26 +51,26 @@ Partial Class LayoutCode
         resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
-        'btnDelete
+        'btnEdit
         '
-        resources.ApplyResources(Me.btnDelete, "btnDelete")
-        Me.btnDelete.BackgroundImage = Global.Authenticator.My.Resources.Resources.Exclude_32x32
-        Me.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnDelete.Name = "btnDelete"
+        resources.ApplyResources(Me.btnEdit, "btnEdit")
+        Me.btnEdit.BackgroundImage = Global.Authenticator.My.Resources.Resources.edit
+        Me.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEdit.Name = "btnEdit"
         '
         'btnQr
         '
         resources.ApplyResources(Me.btnQr, "btnQr")
-        Me.btnQr.BackgroundImage = Global.Authenticator.My.Resources.Resources.QRCODE_48x48
+        Me.btnQr.BackgroundImage = Global.Authenticator.My.Resources.Resources.qr
         Me.btnQr.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnQr.Name = "btnQr"
         '
-        'btnEdit
+        'btnDelete
         '
-        resources.ApplyResources(Me.btnEdit, "btnEdit")
-        Me.btnEdit.BackgroundImage = Global.Authenticator.My.Resources.Resources.Edit_32x32
-        Me.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEdit.Name = "btnEdit"
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.BackgroundImage = Global.Authenticator.My.Resources.Resources.trash
+        Me.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDelete.Name = "btnDelete"
         '
         'LayoutCode
         '

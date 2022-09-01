@@ -104,6 +104,12 @@
     <Compile Include="FormManualCode.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormRenameCode.Designer.vb">
+      <DependentUpon>FormRenameCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRenameCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Logic.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -131,13 +137,13 @@
     <Compile Include="Theme.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ThemeOk.vb">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRenameCode.resx">
+      <DependentUpon>FormRenameCode.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

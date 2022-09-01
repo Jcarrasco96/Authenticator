@@ -61,7 +61,7 @@ Module SQLite
         End Try
     End Function
 
-    Public Function DeleteItem(Name As String) As Boolean
+    Public Function UpdateName(name As String, newName As String) As Boolean
         Try
             SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
@@ -69,7 +69,26 @@ Module SQLite
             SQLconnect.Open()
 
             SQLcommand = SQLconnect.CreateCommand
-            SQLcommand.CommandText = "DELETE FROM Secure_Auth WHERE Name = '" & Name & "'"
+            SQLcommand.CommandText = "UPDATE Secure_Auth SET Name = '" & newName & "' WHERE Name = '" & name & "'"
+            SQLcommand.ExecuteNonQuery()
+
+            SQLconnect.Close()
+            Return True
+        Catch
+            SQLconnect.Close()
+            Return False
+        End Try
+    End Function
+
+    Public Function DeleteItem(name As String) As Boolean
+        Try
+            SQLconnect = New SQLiteConnection With {
+                .ConnectionString = DataSource
+            }
+            SQLconnect.Open()
+
+            SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "DELETE FROM Secure_Auth WHERE Name = '" & name & "'"
             SQLcommand.ExecuteNonQuery()
 
             SQLconnect.Close()

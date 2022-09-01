@@ -25,6 +25,7 @@ Partial Class FormMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.tt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.progressTime = New Authenticator.VisualStudioRadialProgressBar()
         Me.timerCopied = New System.Windows.Forms.Timer(Me.components)
         Me.timerCount = New System.Windows.Forms.Timer(Me.components)
         Me.MysticTheme1 = New Authenticator.MysticTheme()
@@ -35,10 +36,29 @@ Partial Class FormMain
         Me.panelCodes = New System.Windows.Forms.Panel()
         Me.lblCopied = New System.Windows.Forms.Label()
         Me.btnSettings = New Authenticator.MysticButton()
-        Me.progressTime = New Authenticator.VisualStudioRadialProgressBar()
         Me.MysticClose1 = New Authenticator.MysticClose()
         Me.MysticTheme1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'progressTime
+        '
+        Me.progressTime.BackColor = System.Drawing.Color.Transparent
+        Me.progressTime.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.progressTime.BaseColour = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.progressTime.BorderColour = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer))
+        Me.progressTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.progressTime.Location = New System.Drawing.Point(236, 83)
+        Me.progressTime.Maximum = 30
+        Me.progressTime.Name = "progressTime"
+        Me.progressTime.ProgressColour = System.Drawing.Color.Turquoise
+        Me.progressTime.RotationAngle = 360
+        Me.progressTime.Size = New System.Drawing.Size(32, 32)
+        Me.progressTime.StartingAngle = 360
+        Me.progressTime.TabIndex = 19
+        Me.progressTime.Text = "ProgressBar1"
+        Me.progressTime.TextColour = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer))
+        Me.tt.SetToolTip(Me.progressTime, "Time to restart the code")
+        Me.progressTime.Value = 30
         '
         'timerCopied
         '
@@ -69,7 +89,7 @@ Partial Class FormMain
         '
         'btnAdd
         '
-        Me.btnAdd.BackgroundImage = Global.Authenticator.My.Resources.Resources.Add_32x32
+        Me.btnAdd.BackgroundImage = Global.Authenticator.My.Resources.Resources.add
         Me.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAdd.Location = New System.Drawing.Point(12, 45)
         Me.btnAdd.Name = "btnAdd"
@@ -78,7 +98,7 @@ Partial Class FormMain
         '
         'btnInfo
         '
-        Me.btnInfo.BackgroundImage = Global.Authenticator.My.Resources.Resources.information
+        Me.btnInfo.BackgroundImage = Global.Authenticator.My.Resources.Resources.info
         Me.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnInfo.Location = New System.Drawing.Point(236, 45)
         Me.btnInfo.Name = "btnInfo"
@@ -87,7 +107,7 @@ Partial Class FormMain
         '
         'btnSave
         '
-        Me.btnSave.BackgroundImage = Global.Authenticator.My.Resources.Resources.Backup_32x32
+        Me.btnSave.BackgroundImage = Global.Authenticator.My.Resources.Resources.save
         Me.btnSave.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSave.Location = New System.Drawing.Point(160, 45)
         Me.btnSave.Name = "btnSave"
@@ -96,7 +116,7 @@ Partial Class FormMain
         '
         'btnRestore
         '
-        Me.btnRestore.BackgroundImage = Global.Authenticator.My.Resources.Resources.Restore_32x32
+        Me.btnRestore.BackgroundImage = Global.Authenticator.My.Resources.Resources.restore
         Me.btnRestore.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnRestore.Location = New System.Drawing.Point(198, 45)
         Me.btnRestore.Name = "btnRestore"
@@ -132,32 +152,12 @@ Partial Class FormMain
         '
         'btnSettings
         '
-        Me.btnSettings.BackgroundImage = Global.Authenticator.My.Resources.Resources.configuration_32x32
+        Me.btnSettings.BackgroundImage = Global.Authenticator.My.Resources.Resources.settings
         Me.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSettings.Location = New System.Drawing.Point(122, 45)
         Me.btnSettings.Name = "btnSettings"
         Me.btnSettings.Size = New System.Drawing.Size(32, 32)
         Me.btnSettings.TabIndex = 18
-        '
-        'progressTime
-        '
-        Me.progressTime.BackColor = System.Drawing.Color.Transparent
-        Me.progressTime.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.progressTime.BaseColour = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.progressTime.BorderColour = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer))
-        Me.progressTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.progressTime.Location = New System.Drawing.Point(236, 83)
-        Me.progressTime.Maximum = 30
-        Me.progressTime.Name = "progressTime"
-        Me.progressTime.ProgressColour = System.Drawing.Color.Turquoise
-        Me.progressTime.RotationAngle = 360
-        Me.progressTime.Size = New System.Drawing.Size(32, 32)
-        Me.progressTime.StartingAngle = 360
-        Me.progressTime.TabIndex = 19
-        Me.progressTime.Text = "ProgressBar1"
-        Me.progressTime.TextColour = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer))
-        Me.tt.SetToolTip(Me.progressTime, "Time to restart the code")
-        Me.progressTime.Value = 30
         '
         'MysticClose1
         '

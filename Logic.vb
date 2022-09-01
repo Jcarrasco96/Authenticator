@@ -25,6 +25,12 @@ Module Logic
         Return Math.Round((Date.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
     End Function
 
+    Function RemainingSeconds() As Integer
+        Dim secondsNow = GetUnixTimestamp()
+        Dim intervals = secondsNow \ 30
+        Return 30 - (secondsNow - (intervals * 30))
+    End Function
+
     Function CalculateOTP(secretKey As String) As String
         Dim timestamp As Long = GetUnixTimestamp() / 30
         Dim data As Byte() = BitConverter.GetBytes(timestamp).Reverse.ToArray

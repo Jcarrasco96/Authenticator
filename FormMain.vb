@@ -17,34 +17,16 @@ Public Class FormMain
             MSG("Database error, correct them!", 2)
         End If
 
-        progressTime.Value = ProgressMaxValue
-        progressTime.Maximum = ProgressMaxValue
-
-        If TIM < ProgressMaxValue Then
-            progressTime.Value = ProgressMaxValue - TIM
-            timerCount.Start()
-        ElseIf TIM > ProgressMaxValue Then
-            progressTime.Value = ProgressMaxValue - (TIM - ProgressMaxValue)
-            timerCount.Start()
-        End If
-
-        If panelCodes.Controls.Count = 0 Then
-            timerCount.Stop()
-            progressTime.Value = ProgressMaxValue
-        End If
-    End Sub
-
-    Private Sub FormMain_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        End
+        LoadCounter()
     End Sub
 
     Private Sub Timer_Count_Tick(sender As Object, e As EventArgs) Handles timerCount.Tick
+        progressTime.Value -= 1
+
         If progressTime.Value = 0 Then
             progressTime.Value = ProgressMaxValue
             panelCodes.Controls.Clear()
             LoadCode()
-        Else
-            progressTime.Value -= 1
         End If
     End Sub
 
@@ -73,14 +55,14 @@ Public Class FormMain
     End Sub
 
     Private Sub EditName(name As String)
-        'If Application.OpenForms.OfType(Of Rename)().Count() > 0 Then
-        '    Informe_Code.WindowState = FormWindowState.Normal
-        'Else
-        '    Dim Renam As New Rename
-        '    Renam.Names = selectedBtn.Name
-        '    Renam.Senha = Senha
-        '    Renam.Show()
-        'End If
+        If Application.OpenForms.OfType(Of FormRenameCode)().Count() > 0 Then
+            FormRenameCode.WindowState = FormWindowState.Normal
+        Else
+            Dim Renam As New FormRenameCode
+            Renam.Names = name
+            Renam.SetName()
+            Renam.Show()
+        End If
     End Sub
 
     Private Sub QRCode(name As String)
@@ -102,6 +84,7 @@ Public Class FormMain
             If CheckName(name) Then
                 If DeleteItem(name) Then
                     LoadCode()
+                    LoadCounter()
                 Else
                     MSG("No se pudo eliminar.", 2)
                 End If
@@ -157,12 +140,21 @@ Public Class FormMain
                 End If
 
                 LoadCode()
+                LoadCounter()
             End If
         End If
     End Sub
 
-    Private Sub btnInfo_Click(sender As Object, e As EventArgs)
+    Private Sub LoadCounter()
+        progressTime.Maximum = ProgressMaxValue
+        progressTime.Value = RemainingSeconds()
 
+        timerCount.Start()
+
+        If panelCodes.Controls.Count = 0 Then
+            timerCount.Stop()
+            progressTime.Value = ProgressMaxValue
+        End If
     End Sub
 
 End Class

@@ -47,14 +47,14 @@ Partial Class FormManualCode
         Me.MysticTheme1.Location = New System.Drawing.Point(0, 0)
         Me.MysticTheme1.Movible = True
         Me.MysticTheme1.Name = "MysticTheme1"
-        Me.MysticTheme1.Size = New System.Drawing.Size(350, 220)
+        Me.MysticTheme1.Size = New System.Drawing.Size(350, 215)
         Me.MysticTheme1.TabIndex = 6
         Me.MysticTheme1.Text = "Insertar nuevo codigo"
         '
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(162, 175)
+        Me.btnCancel.Location = New System.Drawing.Point(162, 170)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(85, 33)
         Me.btnCancel.TabIndex = 11
@@ -63,7 +63,7 @@ Partial Class FormManualCode
         'btnInsert
         '
         Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnInsert.Location = New System.Drawing.Point(253, 175)
+        Me.btnInsert.Location = New System.Drawing.Point(253, 170)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(85, 33)
         Me.btnInsert.TabIndex = 10
@@ -137,7 +137,7 @@ Partial Class FormManualCode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(350, 220)
+        Me.ClientSize = New System.Drawing.Size(350, 215)
         Me.Controls.Add(Me.MysticTheme1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
