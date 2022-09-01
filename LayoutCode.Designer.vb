@@ -22,13 +22,14 @@ Partial Class LayoutCode
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LayoutCode))
         Me.lblCode = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnEdit = New Authenticator.MysticButton()
-        Me.btnQr = New Authenticator.MysticButton()
         Me.btnDelete = New Authenticator.MysticButton()
+        Me.tt = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblCode
@@ -37,6 +38,7 @@ Partial Class LayoutCode
         Me.lblCode.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblCode.ForeColor = System.Drawing.Color.White
         Me.lblCode.Name = "lblCode"
+        Me.tt.SetToolTip(Me.lblCode, resources.GetString("lblCode.ToolTip"))
         '
         'lblName
         '
@@ -57,13 +59,7 @@ Partial Class LayoutCode
         Me.btnEdit.BackgroundImage = Global.Authenticator.My.Resources.Resources.edit
         Me.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnEdit.Name = "btnEdit"
-        '
-        'btnQr
-        '
-        resources.ApplyResources(Me.btnQr, "btnQr")
-        Me.btnQr.BackgroundImage = Global.Authenticator.My.Resources.Resources.qr
-        Me.btnQr.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnQr.Name = "btnQr"
+        Me.tt.SetToolTip(Me.btnEdit, resources.GetString("btnEdit.ToolTip"))
         '
         'btnDelete
         '
@@ -71,6 +67,7 @@ Partial Class LayoutCode
         Me.btnDelete.BackgroundImage = Global.Authenticator.My.Resources.Resources.trash
         Me.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnDelete.Name = "btnDelete"
+        Me.tt.SetToolTip(Me.btnDelete, resources.GetString("btnDelete.ToolTip"))
         '
         'LayoutCode
         '
@@ -78,7 +75,6 @@ Partial Class LayoutCode
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(63, Byte), Integer))
         Me.Controls.Add(Me.btnEdit)
-        Me.Controls.Add(Me.btnQr)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.lblCode)
         Me.Controls.Add(Me.lblName)
@@ -91,6 +87,6 @@ Partial Class LayoutCode
     Friend WithEvents lblName As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnDelete As MysticButton
-    Friend WithEvents btnQr As MysticButton
     Friend WithEvents btnEdit As MysticButton
+    Friend WithEvents tt As ToolTip
 End Class

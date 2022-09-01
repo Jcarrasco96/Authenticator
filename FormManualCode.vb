@@ -11,7 +11,7 @@
         _Result = "<code>" & Code & "</code><name>" & Name & "</name>"
         txtName.Text = Nothing
         txtCode.Text = Nothing
-        Close()
+        Dispose()
     End Sub
 
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
@@ -27,7 +27,7 @@
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         _Result = ""
-        Close()
+        Dispose()
     End Sub
 
 End Class

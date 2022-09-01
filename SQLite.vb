@@ -3,7 +3,7 @@ Imports System.IO
 
 Module SQLite
 
-    Private Const FILENAME As String = "Authenticator.sqlite"
+    Public Const FILENAME As String = "Authenticator.sqlite"
     Private Const DataSource As String = "Data Source=" & FILENAME & "; Version=3; Compress=True"
 
     Dim SQLconnect As SQLiteConnection
@@ -148,9 +148,7 @@ Module SQLite
 
     Public Function CreateDB() As Boolean
         Try
-            Dim Path As String = Directory.GetCurrentDirectory & "\" & FILENAME
-
-            If File.Exists(Path) Then
+            If File.Exists(FILENAME) Then
                 Return False
             Else
                 SQLiteConnection.CreateFile(FILENAME)

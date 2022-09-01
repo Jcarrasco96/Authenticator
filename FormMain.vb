@@ -1,17 +1,13 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.IO
+Imports System.Net
+Imports System.Text.RegularExpressions
 
 Public Class FormMain
 
-    ReadOnly ProgressMaxValue As Integer = 30
-    ReadOnly TIM As String = Date.Now.Second
+    ReadOnly Period As Integer = 30
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'If CreateDB() Then
-
-        'Else
-        '    MSG("Database create error, correct them!", 2)
-        '    End
-        'End If
+        CreateDB()
 
         If Not LoadCode() Then
             MSG("Database error, correct them!", 2)
@@ -24,7 +20,7 @@ Public Class FormMain
         progressTime.Value -= 1
 
         If progressTime.Value = 0 Then
-            progressTime.Value = ProgressMaxValue
+            progressTime.Value = Period
             panelCodes.Controls.Clear()
             LoadCode()
         End If
@@ -45,7 +41,7 @@ Public Class FormMain
 
         AddHandler newPanel.lblCode.Click, Sub(sender, e) CodeCopied(CODIGO)
         AddHandler newPanel.btnEdit.Click, Sub(sender, e) EditName(Name)
-        AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(Name)
+        'AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(Name, CODIGO)
         AddHandler newPanel.btnDelete.Click, Sub(sender, e) Delete(Name)
 
         panelCodes.Controls.Add(newPanel)
@@ -58,17 +54,26 @@ Public Class FormMain
         If Application.OpenForms.OfType(Of FormRenameCode)().Count() > 0 Then
             FormRenameCode.WindowState = FormWindowState.Normal
         Else
-            Dim Renam As New FormRenameCode
-            Renam.Names = name
+            Dim Renam As New FormRenameCode With {
+                .Names = name
+            }
             Renam.SetName()
             Renam.Show()
         End If
     End Sub
 
-    Private Sub QRCode(name As String)
-        'Dim wc As WebClient = New WebClient()
-        'Dim ms As MemoryStream = New MemoryStream(wc.DownloadData(SetupCode.QrCodeSetupImageUrl))
-        'selectedBtn.Image = Image.FromStream(ms)
+    Private Sub QRCode(name As String, code As String)
+        Dim uri = "otpauth://totp/" & name & "?secret=" & code
+        Dim url = "https://chart.googleapis.com/chart?chs=300x300&chld=M|0&cht=qr&chl=" & uri
+
+        Try
+            Dim wc As New WebClient()
+            Dim ms As New MemoryStream(wc.DownloadData(url))
+
+            btnAdd.BackgroundImage = Image.FromStream(ms)
+        Catch ex As Exception
+            DW(ex.ToString)
+        End Try
     End Sub
 
     Private Sub CodeCopied(code As String)
@@ -95,7 +100,7 @@ Public Class FormMain
     End Sub
 
     Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
-        Close()
+        Dispose()
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -146,15 +151,19 @@ Public Class FormMain
     End Sub
 
     Private Sub LoadCounter()
-        progressTime.Maximum = ProgressMaxValue
+        progressTime.Maximum = Period
         progressTime.Value = RemainingSeconds()
 
         timerCount.Start()
 
         If panelCodes.Controls.Count = 0 Then
             timerCount.Stop()
-            progressTime.Value = ProgressMaxValue
+            progressTime.Value = Period
         End If
+    End Sub
+
+    Private Sub btnInfo_Click(sender As Object, e As EventArgs) Handles btnInfo.Click
+        MSG("Desarrollado por Jesus Carrasco", 1)
     End Sub
 
 End Class

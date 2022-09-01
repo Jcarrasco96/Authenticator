@@ -3,7 +3,7 @@
     Public Property Names As String
 
     Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
-        Close()
+        Dispose()
     End Sub
 
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
@@ -13,7 +13,7 @@
         End If
 
         If txtName.Text = Names Then
-            Me.Close()
+            Dispose()
             Return
         End If
 
@@ -22,12 +22,12 @@
         Else
             UpdateName(Names, txtName.Text)
             LoadCode()
-            Close()
+            Dispose()
         End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Close()
+        Dispose()
     End Sub
 
     Public Sub SetName()

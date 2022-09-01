@@ -54,7 +54,7 @@ Partial Class FormRenameCode
         Me.Label3.Location = New System.Drawing.Point(12, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 16
+        Me.Label3.TabIndex = 0
         Me.Label3.Text = "Nombre"
         '
         'txtName
@@ -68,7 +68,7 @@ Partial Class FormRenameCode
         Me.txtName.Name = "txtName"
         Me.txtName.ReadOnly = False
         Me.txtName.Size = New System.Drawing.Size(326, 27)
-        Me.txtName.TabIndex = 15
+        Me.txtName.TabIndex = 1
         Me.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.txtName.UseSystemPasswordChar = False
         '
@@ -87,19 +87,21 @@ Partial Class FormRenameCode
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancel.Location = New System.Drawing.Point(162, 115)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(85, 33)
-        Me.btnCancel.TabIndex = 13
+        Me.btnCancel.TabIndex = 2
         Me.btnCancel.Text = "Cancelar"
         '
         'btnInsert
         '
         Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnInsert.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnInsert.Location = New System.Drawing.Point(253, 115)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(85, 33)
-        Me.btnInsert.TabIndex = 12
+        Me.btnInsert.TabIndex = 3
         Me.btnInsert.Text = "Renombrar"
         '
         'FormRenameCode

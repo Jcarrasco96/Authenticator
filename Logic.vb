@@ -17,6 +17,7 @@ Module Logic
         MsgBox(message, alertStyle)
     End Sub
 
+    ' For DEBUGGING
     Sub DW(text As String)
         Debug.WriteLine(text)
     End Sub
@@ -36,12 +37,7 @@ Module Logic
         Dim data As Byte() = BitConverter.GetBytes(timestamp).Reverse.ToArray
         Dim hmac As Byte() = New HMACSHA1(secretKey.ToByteArray).ComputeHash(data)
         Dim offset As Integer = hmac.Last And &HF
-        Dim otp As Integer = (
-            ((hmac(offset + 0) And &H7F) << 24) Or
-            ((hmac(offset + 1) And &HFF) << 16) Or
-            ((hmac(offset + 2) And &HFF) << 8) Or
-            (hmac(offset + 3) And &HFF)
-        ) Mod 1000000
+        Dim otp As Integer = (((hmac(offset + 0) And &H7F) << 24) Or ((hmac(offset + 1) And &HFF) << 16) Or ((hmac(offset + 2) And &HFF) << 8) Or (hmac(offset + 3) And &HFF)) Mod 1000000
 
         Return otp.ToString("000000")
     End Function

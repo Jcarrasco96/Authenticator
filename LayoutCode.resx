@@ -135,17 +135,23 @@
     <value>10, 5, 10, 10</value>
   </data>
   <data name="lblCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 32</value>
+    <value>397, 32</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblCode.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="lblCode.Text" xml:space="preserve">
     <value>CODE HERE</value>
   </data>
   <data name="lblCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
+  </data>
+  <metadata name="tt.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="lblCode.ToolTip" xml:space="preserve">
+    <value>Clic to copy Authentication Code</value>
   </data>
   <data name="&gt;&gt;lblCode.Name" xml:space="preserve">
     <value>lblCode</value>
@@ -157,10 +163,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="lblName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="lblName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,7 +184,7 @@
     <value>480, 17</value>
   </data>
   <data name="lblName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblName.Text" xml:space="preserve">
     <value>NAME HERE</value>
@@ -193,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -217,19 +226,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btnEdit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btnEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 32</value>
+    <value>420, 32</value>
   </data>
   <data name="btnEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
   </data>
   <data name="btnEdit.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>3</value>
+  </data>
+  <data name="btnEdit.ToolTip" xml:space="preserve">
+    <value>Modify Authentication Code</value>
   </data>
   <data name="&gt;&gt;btnEdit.Name" xml:space="preserve">
     <value>btnEdit</value>
@@ -243,30 +255,6 @@
   <data name="&gt;&gt;btnEdit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnQr.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnQr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 32</value>
-  </data>
-  <data name="btnQr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
-  <data name="btnQr.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;btnQr.Name" xml:space="preserve">
-    <value>btnQr</value>
-  </data>
-  <data name="&gt;&gt;btnQr.Type" xml:space="preserve">
-    <value>Authenticator.MysticButton, Authenticator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnQr.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnQr.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="btnDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -277,7 +265,10 @@
     <value>32, 32</value>
   </data>
   <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>4</value>
+  </data>
+  <data name="btnDelete.ToolTip" xml:space="preserve">
+    <value>Remove Authentication Code</value>
   </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
@@ -289,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -299,6 +290,12 @@
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 74</value>
+  </data>
+  <data name="&gt;&gt;tt.Name" xml:space="preserve">
+    <value>tt</value>
+  </data>
+  <data name="&gt;&gt;tt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LayoutCode</value>

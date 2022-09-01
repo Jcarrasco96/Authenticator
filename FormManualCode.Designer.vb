@@ -54,19 +54,21 @@ Partial Class FormManualCode
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancel.Location = New System.Drawing.Point(162, 170)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(85, 33)
-        Me.btnCancel.TabIndex = 11
+        Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancelar"
         '
         'btnInsert
         '
         Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnInsert.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnInsert.Location = New System.Drawing.Point(253, 170)
         Me.btnInsert.Name = "btnInsert"
         Me.btnInsert.Size = New System.Drawing.Size(85, 33)
-        Me.btnInsert.TabIndex = 10
+        Me.btnInsert.TabIndex = 4
         Me.btnInsert.Text = "Insertar"
         '
         'MysticClose1
@@ -92,7 +94,7 @@ Partial Class FormManualCode
         Me.txtCode.Name = "txtCode"
         Me.txtCode.ReadOnly = False
         Me.txtCode.Size = New System.Drawing.Size(326, 27)
-        Me.txtCode.TabIndex = 8
+        Me.txtCode.TabIndex = 2
         Me.txtCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.txtCode.UseSystemPasswordChar = False
         '
@@ -104,7 +106,7 @@ Partial Class FormManualCode
         Me.Label2.Location = New System.Drawing.Point(12, 101)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 13)
-        Me.Label2.TabIndex = 7
+        Me.Label2.TabIndex = 0
         Me.Label2.Text = "Codigo privado"
         '
         'Label3
@@ -115,7 +117,7 @@ Partial Class FormManualCode
         Me.Label3.Location = New System.Drawing.Point(12, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 6
+        Me.Label3.TabIndex = 0
         Me.Label3.Text = "Nombre"
         '
         'txtName
@@ -129,7 +131,7 @@ Partial Class FormManualCode
         Me.txtName.Name = "txtName"
         Me.txtName.ReadOnly = False
         Me.txtName.Size = New System.Drawing.Size(326, 27)
-        Me.txtName.TabIndex = 5
+        Me.txtName.TabIndex = 1
         Me.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.txtName.UseSystemPasswordChar = False
         '
