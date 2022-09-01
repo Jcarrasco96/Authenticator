@@ -3,7 +3,7 @@ Imports System.IO
 
 Module SQLite
 
-    Private Const FILENAME As String = "AuthenticatorDatabase.sqlite"
+    Private Const FILENAME As String = "Authenticator.sqlite"
     Private Const DataSource As String = "Data Source=" & FILENAME & "; Version=3; Compress=True"
 
     Dim SQLconnect As SQLiteConnection
@@ -61,11 +61,28 @@ Module SQLite
         End Try
     End Function
 
+    Public Function DeleteItem(Name As String) As Boolean
+        Try
+            SQLconnect = New SQLiteConnection With {
+                .ConnectionString = DataSource
+            }
+            SQLconnect.Open()
+
+            SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "DELETE FROM Secure_Auth WHERE Name = '" & Name & "'"
+            SQLcommand.ExecuteNonQuery()
+
+            SQLconnect.Close()
+            Return True
+        Catch
+            SQLconnect.Close()
+            Return False
+        End Try
+    End Function
+
     Public Function LoadCode() As Boolean
         Try
-            FormMain.ContainerControlQuant = 0
-            FormMain.Total_Auth_lbl.Text = "Total Auth: " & 0
-            FormMain.Panel1.Controls.Clear()
+            FormMain.panelCodes.Controls.Clear()
 
             SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
@@ -99,14 +116,12 @@ Module SQLite
                 Dim otp = CalculateOTP(SecretKey)
 
                 FormMain.Add(Name, otp)
-                FormMain.ContainerControlQuant += 1
-                FormMain.Total_Auth_lbl.Text = "Total Auth: " & FormMain.ContainerControlQuant
             Next
 
             SQLconnect.Close()
             Return True
         Catch e As Exception
-            MsgBox(e.Message)
+            Debug.WriteLine(e.ToString)
             SQLconnect.Close()
             Return False
         End Try

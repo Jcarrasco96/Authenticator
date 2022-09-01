@@ -7,17 +7,26 @@
         End Get
     End Property
 
-    Private Sub VisualStudioButton1_Click(sender As Object, e As EventArgs) Handles VisualStudioButton1.Click
-        If TextBox1.Text = "" And TextBox2.Text = "" Then
+    Private Sub Insert(Name As String, Code As String)
+        _Result = "<code>" & Code & "</code><name>" & Name & "</name>"
+        txtName.Text = Nothing
+        txtCode.Text = Nothing
+        Close()
+    End Sub
+
+    Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
+        If txtName.Text = "" And txtCode.Text = "" Then
         Else
-            Insert(TextBox1.Text, TextBox2.Text)
+            Insert(txtName.Text, txtCode.Text)
         End If
     End Sub
 
-    Private Sub Insert(Code As String, Name As String)
-        _Result = "<code>" & Code & "</code><name>" & Name & "</name>"
-        TextBox1.Text = Nothing
-        TextBox2.Text = Nothing
+    Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
+        Close()
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        _Result = ""
         Close()
     End Sub
 

@@ -3,8 +3,6 @@
 Public Class FormMain
 
     ReadOnly ProgressMaxValue As Integer = 30
-    Public ContainerControlQuant As Integer = 0
-    Dim CountAdd As Integer = 0
     ReadOnly TIM As String = Date.Now.Second
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -23,17 +21,15 @@ Public Class FormMain
         progressTime.Maximum = ProgressMaxValue
 
         If TIM < ProgressMaxValue Then
-            Dim CONT As Integer = ProgressMaxValue - TIM
-            progressTime.Value = CONT
-            Timer_Count.Start()
+            progressTime.Value = ProgressMaxValue - TIM
+            timerCount.Start()
         ElseIf TIM > ProgressMaxValue Then
-            Dim CONT As Integer = (TIM - ProgressMaxValue)
-            progressTime.Value = ProgressMaxValue - CONT
-            Timer_Count.Start()
+            progressTime.Value = ProgressMaxValue - (TIM - ProgressMaxValue)
+            timerCount.Start()
         End If
 
-        If Panel1.Controls.Count = 0 Then
-            Timer_Count.Stop()
+        If panelCodes.Controls.Count = 0 Then
+            timerCount.Stop()
             progressTime.Value = ProgressMaxValue
         End If
     End Sub
@@ -42,7 +38,84 @@ Public Class FormMain
         End
     End Sub
 
-    Private Sub Add_BTN_Click(sender As Object, e As EventArgs) Handles Add_BTN.Click
+    Private Sub Timer_Count_Tick(sender As Object, e As EventArgs) Handles timerCount.Tick
+        If progressTime.Value = 0 Then
+            progressTime.Value = ProgressMaxValue
+            panelCodes.Controls.Clear()
+            LoadCode()
+        Else
+            progressTime.Value -= 1
+        End If
+    End Sub
+
+    Private Sub Timer_Copied_Tick(sender As Object, e As EventArgs) Handles timerCopied.Tick
+        lblCopied.Visible = False
+        timerCopied.Stop()
+    End Sub
+
+    Public Sub Add(Name As String, CODIGO As String)
+        Dim newPanel As New LayoutCode With {
+            .Dock = DockStyle.Top
+        }
+
+        newPanel.lblName.Text = Name
+        newPanel.lblCode.Text = CODIGO
+
+        AddHandler newPanel.lblCode.Click, Sub(sender, e) CodeCopied(CODIGO)
+        AddHandler newPanel.btnEdit.Click, Sub(sender, e) EditName(Name)
+        AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(Name)
+        AddHandler newPanel.btnDelete.Click, Sub(sender, e) Delete(Name)
+
+        panelCodes.Controls.Add(newPanel)
+        panelCodes.Select()
+
+        timerCount.Start()
+    End Sub
+
+    Private Sub EditName(name As String)
+        'If Application.OpenForms.OfType(Of Rename)().Count() > 0 Then
+        '    Informe_Code.WindowState = FormWindowState.Normal
+        'Else
+        '    Dim Renam As New Rename
+        '    Renam.Names = selectedBtn.Name
+        '    Renam.Senha = Senha
+        '    Renam.Show()
+        'End If
+    End Sub
+
+    Private Sub QRCode(name As String)
+        'Dim wc As WebClient = New WebClient()
+        'Dim ms As MemoryStream = New MemoryStream(wc.DownloadData(SetupCode.QrCodeSetupImageUrl))
+        'selectedBtn.Image = Image.FromStream(ms)
+    End Sub
+
+    Private Sub CodeCopied(code As String)
+        Clipboard.SetText(code)
+        lblCopied.Visible = True
+        timerCopied.Start()
+    End Sub
+
+    Private Sub Delete(name As String)
+        Dim result = MsgBox("Esta seguro que desea eliminar el factor de autentificacion """ & name & """?", MsgBoxStyle.YesNo + MsgBoxStyle.Question)
+
+        If result = MsgBoxResult.Yes Then
+            If CheckName(name) Then
+                If DeleteItem(name) Then
+                    LoadCode()
+                Else
+                    MSG("No se pudo eliminar.", 2)
+                End If
+            Else
+                MSG("Este factor de autentificacion no existe.", 2)
+            End If
+        End If
+    End Sub
+
+    Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
+        Close()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If Application.OpenForms.OfType(Of FormManualCode)().Count() > 0 Then
             FormManualCode.WindowState = FormWindowState.Normal
         Else
@@ -58,13 +131,13 @@ Public Class FormMain
                 Dim Codigo As String = Cod.Match(FormManualCode.ResultCaptcha).Value
 
                 If Nome = "" Then
-                    MSG("Null Name!", 2)
+                    MSG("Nombre no puede estar vacio", 2)
                     FormManualCode._Result = Nothing
                     Return
                 End If
 
                 If Codigo = "" Then
-                    MSG("Null Code!", 2)
+                    MSG("Codigo no puede estar vacio", 2)
                     FormManualCode._Result = Nothing
                     Return
                 End If
@@ -84,86 +157,11 @@ Public Class FormMain
                 End If
 
                 LoadCode()
-            Else
-
             End If
         End If
     End Sub
 
-    Private Sub Timer_Count_Tick(sender As Object, e As EventArgs) Handles Timer_Count.Tick
-        If progressTime.Value = 0 Then
-            progressTime.Value = ProgressMaxValue
-            Panel1.Controls.Clear()
-            LoadCode()
-        Else
-            progressTime.Value -= 1
-        End If
-    End Sub
-
-    Private Sub Timer_Copied_Tick(sender As Object, e As EventArgs) Handles Timer_Copied.Tick
-        Copied_lbl.Visible = False
-        Timer_Copied.Stop()
-    End Sub
-
-    Public Sub Add(Name As String, CODIGO As String)
-        Dim newPanel As New Test With {
-            .Dock = DockStyle.Top
-        }
-
-        newPanel.lblName.Text = Name
-        newPanel.lblName.Name = "_Name" & CountAdd
-
-        newPanel.lblCode.Text = CODIGO
-        newPanel.lblCode.Name = "_Code" & CountAdd
-
-        AddHandler newPanel.lblCode.Click, AddressOf CodeCopied
-        AddHandler newPanel.picEdit.Click, AddressOf EditName
-        AddHandler newPanel.picQR.Click, AddressOf QRCode
-        AddHandler newPanel.picDelete.Click, Sub(sender, e) DeleteItem(CODIGO)
-
-        'newPanel.picQR.Image = Imagem.Image
-
-        Panel1.Controls.Add(newPanel)
-
-        Panel1.Select()
-
-        Timer_Count.Start()
-        CountAdd += 1
-    End Sub
-
-    Private Sub EditName(sender As Object, e As EventArgs)
-        Dim selectedBtn As PictureBox = sender
-
-        'If Application.OpenForms.OfType(Of Rename)().Count() > 0 Then
-        '    Informe_Code.WindowState = FormWindowState.Normal
-        'Else
-        '    Dim Renam As New Rename
-        '    Renam.Names = selectedBtn.Name
-        '    Renam.Senha = Senha
-        '    Renam.Show()
-        'End If
-    End Sub
-
-    Private Sub QRCode(sender As Object, e As EventArgs)
-        Dim selectedBtn As PictureBox = sender
-        'Dim wc As WebClient = New WebClient()
-        'Dim ms As MemoryStream = New MemoryStream(wc.DownloadData(SetupCode.QrCodeSetupImageUrl))
-        'selectedBtn.Image = Image.FromStream(ms)
-    End Sub
-
-    Private Sub CodeCopied(sender As Object, e As EventArgs)
-        Dim selectedBtn As Label = sender
-        Clipboard.SetText(selectedBtn.Text)
-        Copied_lbl.Visible = True
-        Timer_Copied.Start()
-    End Sub
-
-    Private Sub DeleteItem(code As String)
-        MSG(code)
-    End Sub
-
-    Private Sub Configuracao_BTN_Click(sender As Object, e As EventArgs) Handles Configuracao_BTN.Click
-        Init()
+    Private Sub btnInfo_Click(sender As Object, e As EventArgs)
 
     End Sub
 

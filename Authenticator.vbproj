@@ -91,12 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criptography.vb" />
-    <Compile Include="FormDialog.Designer.vb">
-      <DependentUpon>FormDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -110,14 +104,7 @@
     <Compile Include="FormManualCode.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNotice.Designer.vb">
-      <DependentUpon>FormNotice.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormNotice.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Logic.vb" />
-    <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -135,20 +122,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SQLite.vb" />
-    <Compile Include="Test.Designer.vb">
-      <DependentUpon>Test.vb</DependentUpon>
+    <Compile Include="LayoutCode.Designer.vb">
+      <DependentUpon>LayoutCode.vb</DependentUpon>
     </Compile>
-    <Compile Include="Test.vb">
+    <Compile Include="LayoutCode.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Theme.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ThemeOk.vb">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormDialog.resx">
-      <DependentUpon>FormDialog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -157,14 +144,11 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNotice.resx">
-      <DependentUpon>FormNotice.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormManualCode.resx">
       <DependentUpon>FormManualCode.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test.resx">
-      <DependentUpon>Test.vb</DependentUpon>
+    <EmbeddedResource Include="LayoutCode.resx">
+      <DependentUpon>LayoutCode.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -24,154 +24,120 @@ Partial Class FormMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Timer_Copied = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer_Count = New System.Windows.Forms.Timer(Me.components)
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.RestaureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VisualStudioContainer1 = New Authenticator.VisualStudioContainer()
-        Me.Copied_lbl = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Hide_btn = New System.Windows.Forms.Button()
-        Me.Total_Auth_lbl = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.tt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.timerCopied = New System.Windows.Forms.Timer(Me.components)
+        Me.timerCount = New System.Windows.Forms.Timer(Me.components)
+        Me.MysticTheme1 = New Authenticator.MysticTheme()
+        Me.btnAdd = New Authenticator.MysticButton()
+        Me.btnInfo = New Authenticator.MysticButton()
+        Me.btnSave = New Authenticator.MysticButton()
+        Me.btnRestore = New Authenticator.MysticButton()
+        Me.panelCodes = New System.Windows.Forms.Panel()
+        Me.lblCopied = New System.Windows.Forms.Label()
+        Me.btnSettings = New Authenticator.MysticButton()
         Me.progressTime = New Authenticator.VisualStudioRadialProgressBar()
-        Me.Restore_BTN = New System.Windows.Forms.Button()
-        Me.Backup_BTN = New System.Windows.Forms.Button()
-        Me.Configuracao_BTN = New System.Windows.Forms.Button()
-        Me.Add_BTN = New System.Windows.Forms.Button()
-        Me.ContextMenuStrip1.SuspendLayout()
-        Me.VisualStudioContainer1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MysticClose1 = New Authenticator.MysticClose()
+        Me.MysticTheme1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Timer_Copied
+        'timerCopied
         '
-        Me.Timer_Copied.Interval = 3000
+        Me.timerCopied.Interval = 3000
         '
-        'Timer_Count
+        'timerCount
         '
-        Me.Timer_Count.Interval = 1000
+        Me.timerCount.Interval = 1000
         '
-        'NotifyIcon1
+        'MysticTheme1
         '
-        Me.NotifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.NotifyIcon1.BalloonTipText = "Secure Auth."
-        Me.NotifyIcon1.BalloonTipTitle = "Secure Auth."
-        Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.NotifyIcon1.Text = "Secure Auth."
+        Me.MysticTheme1.Controls.Add(Me.btnAdd)
+        Me.MysticTheme1.Controls.Add(Me.btnInfo)
+        Me.MysticTheme1.Controls.Add(Me.btnSave)
+        Me.MysticTheme1.Controls.Add(Me.btnRestore)
+        Me.MysticTheme1.Controls.Add(Me.panelCodes)
+        Me.MysticTheme1.Controls.Add(Me.lblCopied)
+        Me.MysticTheme1.Controls.Add(Me.btnSettings)
+        Me.MysticTheme1.Controls.Add(Me.progressTime)
+        Me.MysticTheme1.Controls.Add(Me.MysticClose1)
+        Me.MysticTheme1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MysticTheme1.Location = New System.Drawing.Point(0, 0)
+        Me.MysticTheme1.Movible = True
+        Me.MysticTheme1.Name = "MysticTheme1"
+        Me.MysticTheme1.Size = New System.Drawing.Size(280, 650)
+        Me.MysticTheme1.TabIndex = 1
+        Me.MysticTheme1.Text = "Authenticator"
         '
-        'ContextMenuStrip1
+        'btnAdd
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RestaureToolStripMenuItem, Me.CloseToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(120, 48)
+        Me.btnAdd.BackgroundImage = Global.Authenticator.My.Resources.Resources.Add_32x32
+        Me.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAdd.Location = New System.Drawing.Point(12, 45)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(32, 32)
+        Me.btnAdd.TabIndex = 17
         '
-        'RestaureToolStripMenuItem
+        'btnInfo
         '
-        Me.RestaureToolStripMenuItem.Image = Global.Authenticator.My.Resources.Resources.restore_window_Green_16x16
-        Me.RestaureToolStripMenuItem.Name = "RestaureToolStripMenuItem"
-        Me.RestaureToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
-        Me.RestaureToolStripMenuItem.Text = "Restaure"
+        Me.btnInfo.BackgroundImage = Global.Authenticator.My.Resources.Resources.information
+        Me.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnInfo.Location = New System.Drawing.Point(236, 45)
+        Me.btnInfo.Name = "btnInfo"
+        Me.btnInfo.Size = New System.Drawing.Size(32, 32)
+        Me.btnInfo.TabIndex = 25
         '
-        'CloseToolStripMenuItem
+        'btnSave
         '
-        Me.CloseToolStripMenuItem.Image = Global.Authenticator.My.Resources.Resources.close_window_Green_16x16
-        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
-        Me.CloseToolStripMenuItem.Text = "Close"
+        Me.btnSave.BackgroundImage = Global.Authenticator.My.Resources.Resources.Backup_32x32
+        Me.btnSave.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSave.Location = New System.Drawing.Point(160, 45)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(32, 32)
+        Me.btnSave.TabIndex = 24
         '
-        'VisualStudioContainer1
+        'btnRestore
         '
-        Me.VisualStudioContainer1.AllowClose = True
-        Me.VisualStudioContainer1.AllowMinimize = True
-        Me.VisualStudioContainer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.VisualStudioContainer1.BaseColour = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.VisualStudioContainer1.BorderColour = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(18, Byte), Integer))
-        Me.VisualStudioContainer1.Controls.Add(Me.Copied_lbl)
-        Me.VisualStudioContainer1.Controls.Add(Me.Panel1)
-        Me.VisualStudioContainer1.Controls.Add(Me.Hide_btn)
-        Me.VisualStudioContainer1.Controls.Add(Me.Total_Auth_lbl)
-        Me.VisualStudioContainer1.Controls.Add(Me.PictureBox1)
-        Me.VisualStudioContainer1.Controls.Add(Me.progressTime)
-        Me.VisualStudioContainer1.Controls.Add(Me.Restore_BTN)
-        Me.VisualStudioContainer1.Controls.Add(Me.Backup_BTN)
-        Me.VisualStudioContainer1.Controls.Add(Me.Configuracao_BTN)
-        Me.VisualStudioContainer1.Controls.Add(Me.Add_BTN)
-        Me.VisualStudioContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.VisualStudioContainer1.FontColour = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer))
-        Me.VisualStudioContainer1.FontSize = 12
-        Me.VisualStudioContainer1.Form = Me
-        Me.VisualStudioContainer1.FormOrWhole = Authenticator.VisualStudioContainer.__FormOrWhole.WholeApplication
-        Me.VisualStudioContainer1.HoverColour = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.VisualStudioContainer1.IconStyle = Authenticator.VisualStudioContainer.__IconStyle.FormIcon
-        Me.VisualStudioContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.VisualStudioContainer1.Name = "VisualStudioContainer1"
-        Me.VisualStudioContainer1.ShowIcon = True
-        Me.VisualStudioContainer1.Size = New System.Drawing.Size(300, 800)
-        Me.VisualStudioContainer1.TabIndex = 0
-        Me.VisualStudioContainer1.Text = "Authenticator"
+        Me.btnRestore.BackgroundImage = Global.Authenticator.My.Resources.Resources.Restore_32x32
+        Me.btnRestore.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRestore.Location = New System.Drawing.Point(198, 45)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(32, 32)
+        Me.btnRestore.TabIndex = 23
         '
-        'Copied_lbl
+        'panelCodes
         '
-        Me.Copied_lbl.AutoSize = True
-        Me.Copied_lbl.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Copied_lbl.ForeColor = System.Drawing.Color.Chartreuse
-        Me.Copied_lbl.Location = New System.Drawing.Point(12, 89)
-        Me.Copied_lbl.Name = "Copied_lbl"
-        Me.Copied_lbl.Size = New System.Drawing.Size(56, 19)
-        Me.Copied_lbl.TabIndex = 9
-        Me.Copied_lbl.Text = "Copied!"
-        Me.Copied_lbl.Visible = False
+        Me.panelCodes.AllowDrop = True
+        Me.panelCodes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelCodes.AutoScroll = True
+        Me.panelCodes.BackColor = System.Drawing.Color.Transparent
+        Me.panelCodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelCodes.Location = New System.Drawing.Point(12, 121)
+        Me.panelCodes.Name = "panelCodes"
+        Me.panelCodes.Size = New System.Drawing.Size(256, 517)
+        Me.panelCodes.TabIndex = 0
         '
-        'Panel1
+        'lblCopied
         '
-        Me.Panel1.AllowDrop = True
-        Me.Panel1.AutoScroll = True
-        Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Location = New System.Drawing.Point(12, 114)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(276, 644)
-        Me.Panel1.TabIndex = 0
+        Me.lblCopied.AutoSize = True
+        Me.lblCopied.BackColor = System.Drawing.Color.Transparent
+        Me.lblCopied.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblCopied.ForeColor = System.Drawing.Color.Chartreuse
+        Me.lblCopied.Location = New System.Drawing.Point(12, 96)
+        Me.lblCopied.Name = "lblCopied"
+        Me.lblCopied.Size = New System.Drawing.Size(56, 19)
+        Me.lblCopied.TabIndex = 9
+        Me.lblCopied.Text = "Copied!"
+        Me.lblCopied.Visible = False
         '
-        'Hide_btn
+        'btnSettings
         '
-        Me.Hide_btn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Hide_btn.FlatAppearance.BorderSize = 0
-        Me.Hide_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Hide_btn.Image = Global.Authenticator.My.Resources.Resources.hide_32x32
-        Me.Hide_btn.Location = New System.Drawing.Point(180, 38)
-        Me.Hide_btn.Name = "Hide_btn"
-        Me.Hide_btn.Size = New System.Drawing.Size(32, 32)
-        Me.Hide_btn.TabIndex = 21
-        Me.ToolTip1.SetToolTip(Me.Hide_btn, "Remove Authentication Code.")
-        Me.Hide_btn.UseVisualStyleBackColor = True
-        '
-        'Total_Auth_lbl
-        '
-        Me.Total_Auth_lbl.AutoSize = True
-        Me.Total_Auth_lbl.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Total_Auth_lbl.ForeColor = System.Drawing.SystemColors.ControlDark
-        Me.Total_Auth_lbl.Location = New System.Drawing.Point(12, 772)
-        Me.Total_Auth_lbl.Name = "Total_Auth_lbl"
-        Me.Total_Auth_lbl.Size = New System.Drawing.Size(79, 19)
-        Me.Total_Auth_lbl.TabIndex = 11
-        Me.Total_Auth_lbl.Text = "Total Auth: "
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Image = Global.Authenticator.My.Resources.Resources.Information_48x48
-        Me.PictureBox1.Location = New System.Drawing.Point(264, 764)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(24, 24)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 10
-        Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Make a donation!")
+        Me.btnSettings.BackgroundImage = Global.Authenticator.My.Resources.Resources.configuration_32x32
+        Me.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSettings.Location = New System.Drawing.Point(122, 45)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Size = New System.Drawing.Size(32, 32)
+        Me.btnSettings.TabIndex = 18
         '
         'progressTime
         '
@@ -180,7 +146,7 @@ Partial Class FormMain
         Me.progressTime.BaseColour = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.progressTime.BorderColour = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer))
         Me.progressTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.progressTime.Location = New System.Drawing.Point(256, 76)
+        Me.progressTime.Location = New System.Drawing.Point(236, 83)
         Me.progressTime.Maximum = 30
         Me.progressTime.Name = "progressTime"
         Me.progressTime.ProgressColour = System.Drawing.Color.Turquoise
@@ -190,99 +156,50 @@ Partial Class FormMain
         Me.progressTime.TabIndex = 19
         Me.progressTime.Text = "ProgressBar1"
         Me.progressTime.TextColour = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer))
-        Me.ToolTip1.SetToolTip(Me.progressTime, "Time to restart the code")
+        Me.tt.SetToolTip(Me.progressTime, "Time to restart the code")
         Me.progressTime.Value = 30
         '
-        'Restore_BTN
+        'MysticClose1
         '
-        Me.Restore_BTN.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Restore_BTN.FlatAppearance.BorderSize = 0
-        Me.Restore_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Restore_BTN.Image = Global.Authenticator.My.Resources.Resources.Restore_32x32
-        Me.Restore_BTN.Location = New System.Drawing.Point(256, 38)
-        Me.Restore_BTN.Name = "Restore_BTN"
-        Me.Restore_BTN.Size = New System.Drawing.Size(32, 32)
-        Me.Restore_BTN.TabIndex = 17
-        Me.ToolTip1.SetToolTip(Me.Restore_BTN, "Restore Your Private Codes.")
-        Me.Restore_BTN.UseVisualStyleBackColor = True
-        '
-        'Backup_BTN
-        '
-        Me.Backup_BTN.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Backup_BTN.FlatAppearance.BorderSize = 0
-        Me.Backup_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Backup_BTN.Image = Global.Authenticator.My.Resources.Resources.Backup_32x32
-        Me.Backup_BTN.Location = New System.Drawing.Point(218, 38)
-        Me.Backup_BTN.Name = "Backup_BTN"
-        Me.Backup_BTN.Size = New System.Drawing.Size(32, 32)
-        Me.Backup_BTN.TabIndex = 18
-        Me.ToolTip1.SetToolTip(Me.Backup_BTN, "Make Backup your Private Codes")
-        Me.Backup_BTN.UseVisualStyleBackColor = True
-        '
-        'Configuracao_BTN
-        '
-        Me.Configuracao_BTN.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Configuracao_BTN.FlatAppearance.BorderSize = 0
-        Me.Configuracao_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Configuracao_BTN.Image = Global.Authenticator.My.Resources.Resources.configuration_32x32
-        Me.Configuracao_BTN.Location = New System.Drawing.Point(50, 38)
-        Me.Configuracao_BTN.Name = "Configuracao_BTN"
-        Me.Configuracao_BTN.Size = New System.Drawing.Size(32, 32)
-        Me.Configuracao_BTN.TabIndex = 16
-        Me.ToolTip1.SetToolTip(Me.Configuracao_BTN, "Open Configuration")
-        Me.Configuracao_BTN.UseVisualStyleBackColor = True
-        '
-        'Add_BTN
-        '
-        Me.Add_BTN.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Add_BTN.FlatAppearance.BorderSize = 0
-        Me.Add_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Add_BTN.Image = Global.Authenticator.My.Resources.Resources.Add_32x32
-        Me.Add_BTN.Location = New System.Drawing.Point(12, 38)
-        Me.Add_BTN.Name = "Add_BTN"
-        Me.Add_BTN.Size = New System.Drawing.Size(32, 32)
-        Me.Add_BTN.TabIndex = 14
-        Me.ToolTip1.SetToolTip(Me.Add_BTN, "Add new Authentication Code.")
-        Me.Add_BTN.UseVisualStyleBackColor = True
+        Me.MysticClose1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MysticClose1.BackColor = System.Drawing.Color.Transparent
+        Me.MysticClose1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.MysticClose1.Location = New System.Drawing.Point(250, 6)
+        Me.MysticClose1.Margin = New System.Windows.Forms.Padding(6)
+        Me.MysticClose1.Name = "MysticClose1"
+        Me.MysticClose1.Size = New System.Drawing.Size(24, 24)
+        Me.MysticClose1.TabIndex = 1
+        Me.MysticClose1.Text = "MysticClose1"
         '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(300, 800)
-        Me.Controls.Add(Me.VisualStudioContainer1)
+        Me.ClientSize = New System.Drawing.Size(280, 650)
+        Me.Controls.Add(Me.MysticTheme1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(300, 800)
-        Me.MinimumSize = New System.Drawing.Size(300, 800)
         Me.Name = "FormMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Authenticator"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
-        Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.VisualStudioContainer1.ResumeLayout(False)
-        Me.VisualStudioContainer1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MysticTheme1.ResumeLayout(False)
+        Me.MysticTheme1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents VisualStudioContainer1 As Authenticator.VisualStudioContainer
-    Friend WithEvents Hide_btn As System.Windows.Forms.Button
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents Total_Auth_lbl As System.Windows.Forms.Label
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents tt As System.Windows.Forms.ToolTip
     Friend WithEvents progressTime As Authenticator.VisualStudioRadialProgressBar
-    Friend WithEvents Restore_BTN As System.Windows.Forms.Button
-    Friend WithEvents Backup_BTN As System.Windows.Forms.Button
-    Friend WithEvents Configuracao_BTN As System.Windows.Forms.Button
-    Friend WithEvents Add_BTN As System.Windows.Forms.Button
-    Friend WithEvents Copied_lbl As System.Windows.Forms.Label
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Timer_Copied As System.Windows.Forms.Timer
-    Friend WithEvents Timer_Count As System.Windows.Forms.Timer
-    Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
-    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents RestaureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents lblCopied As System.Windows.Forms.Label
+    Friend WithEvents panelCodes As System.Windows.Forms.Panel
+    Friend WithEvents timerCopied As System.Windows.Forms.Timer
+    Friend WithEvents timerCount As System.Windows.Forms.Timer
+    Friend WithEvents MysticTheme1 As MysticTheme
+    Friend WithEvents MysticClose1 As MysticClose
+    Friend WithEvents btnAdd As MysticButton
+    Friend WithEvents btnSave As MysticButton
+    Friend WithEvents btnRestore As MysticButton
+    Friend WithEvents btnSettings As MysticButton
+    Friend WithEvents btnInfo As MysticButton
 End Class
