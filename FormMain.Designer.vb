@@ -25,47 +25,20 @@ Partial Class FormMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.tt = New System.Windows.Forms.ToolTip(Me.components)
-        Me.timerCopied = New System.Windows.Forms.Timer(Me.components)
-        Me.timerCount = New System.Windows.Forms.Timer(Me.components)
-        Me.MysticTheme1 = New Authenticator.MysticTheme()
         Me.btnAdd = New Authenticator.MysticButton()
         Me.btnInfo = New Authenticator.MysticButton()
         Me.btnSave = New Authenticator.MysticButton()
         Me.btnRestore = New Authenticator.MysticButton()
-        Me.panelCodes = New System.Windows.Forms.Panel()
-        Me.lblCopied = New System.Windows.Forms.Label()
         Me.btnSettings = New Authenticator.MysticButton()
         Me.progressTime = New Authenticator.VisualStudioRadialProgressBar()
+        Me.timerCopied = New System.Windows.Forms.Timer(Me.components)
+        Me.timerCount = New System.Windows.Forms.Timer(Me.components)
+        Me.MysticTheme1 = New Authenticator.MysticTheme()
+        Me.panelCodes = New System.Windows.Forms.Panel()
+        Me.lblCopied = New System.Windows.Forms.Label()
         Me.MysticClose1 = New Authenticator.MysticClose()
         Me.MysticTheme1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'timerCopied
-        '
-        Me.timerCopied.Interval = 3000
-        '
-        'timerCount
-        '
-        Me.timerCount.Interval = 1000
-        '
-        'MysticTheme1
-        '
-        Me.MysticTheme1.Controls.Add(Me.btnAdd)
-        Me.MysticTheme1.Controls.Add(Me.btnInfo)
-        Me.MysticTheme1.Controls.Add(Me.btnSave)
-        Me.MysticTheme1.Controls.Add(Me.btnRestore)
-        Me.MysticTheme1.Controls.Add(Me.panelCodes)
-        Me.MysticTheme1.Controls.Add(Me.lblCopied)
-        Me.MysticTheme1.Controls.Add(Me.btnSettings)
-        Me.MysticTheme1.Controls.Add(Me.progressTime)
-        Me.MysticTheme1.Controls.Add(Me.MysticClose1)
-        Me.MysticTheme1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MysticTheme1.Location = New System.Drawing.Point(0, 0)
-        Me.MysticTheme1.Movible = True
-        Me.MysticTheme1.Name = "MysticTheme1"
-        Me.MysticTheme1.Size = New System.Drawing.Size(280, 650)
-        Me.MysticTheme1.TabIndex = 1
-        Me.MysticTheme1.Text = "Authenticator"
         '
         'btnAdd
         '
@@ -96,7 +69,6 @@ Partial Class FormMain
         Me.btnSave.Size = New System.Drawing.Size(32, 32)
         Me.btnSave.TabIndex = 3
         Me.tt.SetToolTip(Me.btnSave, "Make Backup your Private Codes")
-        Me.btnSave.Visible = False
         '
         'btnRestore
         '
@@ -107,34 +79,6 @@ Partial Class FormMain
         Me.btnRestore.Size = New System.Drawing.Size(32, 32)
         Me.btnRestore.TabIndex = 4
         Me.tt.SetToolTip(Me.btnRestore, "Restore Your Private Codes")
-        Me.btnRestore.Visible = False
-        '
-        'panelCodes
-        '
-        Me.panelCodes.AllowDrop = True
-        Me.panelCodes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.panelCodes.AutoScroll = True
-        Me.panelCodes.BackColor = System.Drawing.Color.Transparent
-        Me.panelCodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panelCodes.Location = New System.Drawing.Point(12, 121)
-        Me.panelCodes.Name = "panelCodes"
-        Me.panelCodes.Size = New System.Drawing.Size(256, 517)
-        Me.panelCodes.TabIndex = 0
-        '
-        'lblCopied
-        '
-        Me.lblCopied.AutoSize = True
-        Me.lblCopied.BackColor = System.Drawing.Color.Transparent
-        Me.lblCopied.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblCopied.ForeColor = System.Drawing.Color.Chartreuse
-        Me.lblCopied.Location = New System.Drawing.Point(12, 96)
-        Me.lblCopied.Name = "lblCopied"
-        Me.lblCopied.Size = New System.Drawing.Size(105, 19)
-        Me.lblCopied.TabIndex = 6
-        Me.lblCopied.Text = "Codigo copiado"
-        Me.lblCopied.Visible = False
         '
         'btnSettings
         '
@@ -167,6 +111,60 @@ Partial Class FormMain
         Me.progressTime.TextColour = System.Drawing.Color.White
         Me.tt.SetToolTip(Me.progressTime, "Time to restart the code")
         Me.progressTime.Value = 30
+        '
+        'timerCopied
+        '
+        Me.timerCopied.Interval = 3000
+        '
+        'timerCount
+        '
+        Me.timerCount.Interval = 1000
+        '
+        'MysticTheme1
+        '
+        Me.MysticTheme1.Controls.Add(Me.btnAdd)
+        Me.MysticTheme1.Controls.Add(Me.btnInfo)
+        Me.MysticTheme1.Controls.Add(Me.btnSave)
+        Me.MysticTheme1.Controls.Add(Me.btnRestore)
+        Me.MysticTheme1.Controls.Add(Me.panelCodes)
+        Me.MysticTheme1.Controls.Add(Me.lblCopied)
+        Me.MysticTheme1.Controls.Add(Me.btnSettings)
+        Me.MysticTheme1.Controls.Add(Me.progressTime)
+        Me.MysticTheme1.Controls.Add(Me.MysticClose1)
+        Me.MysticTheme1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MysticTheme1.Location = New System.Drawing.Point(0, 0)
+        Me.MysticTheme1.Movible = True
+        Me.MysticTheme1.Name = "MysticTheme1"
+        Me.MysticTheme1.Size = New System.Drawing.Size(280, 650)
+        Me.MysticTheme1.TabIndex = 1
+        Me.MysticTheme1.Text = "Authenticator"
+        '
+        'panelCodes
+        '
+        Me.panelCodes.AllowDrop = True
+        Me.panelCodes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelCodes.AutoScroll = True
+        Me.panelCodes.BackColor = System.Drawing.Color.Transparent
+        Me.panelCodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelCodes.Location = New System.Drawing.Point(12, 121)
+        Me.panelCodes.Name = "panelCodes"
+        Me.panelCodes.Size = New System.Drawing.Size(256, 517)
+        Me.panelCodes.TabIndex = 0
+        '
+        'lblCopied
+        '
+        Me.lblCopied.AutoSize = True
+        Me.lblCopied.BackColor = System.Drawing.Color.Transparent
+        Me.lblCopied.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblCopied.ForeColor = System.Drawing.Color.Chartreuse
+        Me.lblCopied.Location = New System.Drawing.Point(12, 96)
+        Me.lblCopied.Name = "lblCopied"
+        Me.lblCopied.Size = New System.Drawing.Size(105, 19)
+        Me.lblCopied.TabIndex = 6
+        Me.lblCopied.Text = "Codigo copiado"
+        Me.lblCopied.Visible = False
         '
         'MysticClose1
         '

@@ -25,7 +25,7 @@
             I += 1
         End While
 
-        If Not InsertCode(name, txtCode.Text) Then
+        If Not InsertCode(name, AESEncrypt(txtCode.Text)) Then
             MSG("Unable to insert into database, check database integrity.", 2)
         End If
 

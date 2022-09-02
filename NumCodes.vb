@@ -9,14 +9,14 @@ Public Class NumCodes
 
     Public Sub New(name As String, secret As String, period As Integer, active As Integer)
         Me.Name = name
-        Me.SecretKey = secret
+        SecretKey = secret
         Me.Period = period
         Me.Active = active
     End Sub
 
     Public ReadOnly Property OTP As String
         Get
-            Return CalculateOTP(SecretKey)
+            Return CalculateOTP(AESDecrypt(SecretKey))
         End Get
     End Property
 
@@ -28,6 +28,10 @@ Public Class NumCodes
         Dim otp As Integer = (((hmac(offset + 0) And &H7F) << 24) Or ((hmac(offset + 1) And &HFF) << 16) Or ((hmac(offset + 2) And &HFF) << 8) Or (hmac(offset + 3) And &HFF)) Mod 1000000
 
         Return otp.ToString("000000")
+    End Function
+
+    Public Overrides Function ToString() As String
+        Return Name & "*" & SecretKey & "*" & Period & "*" & Active
     End Function
 
 End Class

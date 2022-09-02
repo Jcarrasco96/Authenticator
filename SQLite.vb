@@ -3,8 +3,10 @@ Imports System.IO
 
 Module SQLite
 
-    Public Const FILENAME As String = "Authenticator.sqlite"
-    Private Const DataSource As String = "Data Source=" & FILENAME & "; Version=3; Compress=True"
+    Private ReadOnly AppData As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+    Public ReadOnly AppDataDirectoryApp As String = AppData & "\Authenticator\"
+    Private ReadOnly FileDataBase As String = AppDataDirectoryApp & "data.sqlite"
+    Private ReadOnly DataSource As String = "Data Source=" & FileDataBase & "; Version=3; Compress=True"
 
     Public Function CheckName(name As String) As Boolean
         Dim SQLconnect As SQLiteConnection
@@ -35,7 +37,7 @@ Module SQLite
         End Try
     End Function
 
-    Public Function InsertCode(Name As String, Code As String, Optional Period As Integer = 30) As Boolean
+    Public Function InsertCode(name As String, code As String, Optional period As Integer = 30) As Boolean
         Try
             Dim SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
@@ -43,7 +45,7 @@ Module SQLite
             SQLconnect.Open()
 
             Dim SQLcommand = SQLconnect.CreateCommand
-            SQLcommand.CommandText = "INSERT INTO AuthorizationCode (Name, Code, Period, Active) values ('" & Name & "','" & Code & "','" & Period & "',1)"
+            SQLcommand.CommandText = "INSERT INTO AuthorizationCode (Name, Code, Period, Active) values ('" & name & "','" & code & "','" & period & "',1)"
             SQLcommand.ExecuteNonQuery()
 
             SQLconnect.Close()
@@ -127,10 +129,12 @@ Module SQLite
 
     Public Function CreateDB() As Boolean
         Try
-            If File.Exists(FILENAME) Then
+            If File.Exists(FileDataBase) Then
                 Return False
             Else
-                SQLiteConnection.CreateFile(FILENAME)
+                If Not My.Computer.FileSystem.GetDirectoryInfo(AppDataDirectoryApp).Exists Then My.Computer.FileSystem.CreateDirectory(AppDataDirectoryApp)
+
+                SQLiteConnection.CreateFile(FileDataBase)
 
                 Dim SQLconnect = New SQLiteConnection With {
                     .ConnectionString = DataSource

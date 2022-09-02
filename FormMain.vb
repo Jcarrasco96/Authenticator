@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Security.Cryptography
+Imports System.Text
 Imports System.Text.RegularExpressions
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class FormMain
 
@@ -151,6 +154,79 @@ Public Class FormMain
                 panelCodes.Controls.Add(newPanel)
                 panelCodes.Select()
             Next
+        End If
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim fileInput = AppDataDirectoryApp & "dec.temp" ' temporal file
+
+        Dim arrCodes = GetCodes()
+
+        If arrCodes.Count = 0 Then
+            MSG("No hay datos para guardar", 1)
+        Else
+            Dim sfd As New SaveFileDialog With {
+                .CheckPathExists = True,
+                .Filter = "Archivos de salvas de Authenticator|*.athsave",
+                .FileName = "Authenticator Saves"
+            }
+
+            If sfd.ShowDialog() = DialogResult.OK Then
+                For Each numCode As NumCodes In arrCodes
+                    My.Computer.FileSystem.WriteAllText(fileInput, numCode.ToString & vbCrLf, True)
+                Next
+
+                EncryptFile(fileInput, sfd.FileName)
+
+                My.Computer.FileSystem.DeleteFile(fileInput)
+
+                MSG("Codigos privados salvados correctamente", 1)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        Dim fileInput = AppDataDirectoryApp & "dec.temp" ' temporal file
+
+        Dim ofd As New OpenFileDialog With {
+            .CheckFileExists = True,
+            .Filter = "Archivos de salvas de Authenticator|*.athsave",
+            .FileName = "Authenticator Saves"
+        }
+
+        If ofd.ShowDialog = DialogResult.OK Then
+            DecrptFile(ofd.FileName, fileInput)
+
+            Dim fields As String()
+            Dim parser As New TextFieldParser(fileInput)
+            parser.SetDelimiters("*")
+            While Not parser.EndOfData
+                fields = parser.ReadFields()
+
+                If fields.Length = 4 Then
+                    Dim name = fields(0)
+                    Dim secretKey = fields(1)
+                    Dim period = fields(2)
+
+                    Dim I As Integer = 1
+                    Dim Rep As String = name
+
+                    While CheckName(name)
+                        name = Rep + " (" & I & ")"
+                        I += 1
+                    End While
+
+                    InsertCode(name, secretKey, period)
+                End If
+            End While
+            parser.Close()
+
+            My.Computer.FileSystem.DeleteFile(fileInput)
+
+            MSG("Codigos privados restaurados correctamente", 1)
+
+            LoadCode()
+            LoadCounter()
         End If
     End Sub
 

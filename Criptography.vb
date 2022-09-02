@@ -6,12 +6,14 @@ Module Criptography
 
     Private Const Base32AllowedCharacters As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
 
-    Public Function AES_Decrypt(input As String, pass As String) As String
+    Private Const PassCode As String = "!S0Me-P455w*r6//+"
+
+    Public Function AESDecrypt(input As String) As String
         Dim managed As New RijndaelManaged
         Dim provider As New MD5CryptoServiceProvider
         Try
             Dim destinationArray As Byte() = New Byte(&H20 - 1) {}
-            Dim sourceArray As Byte() = provider.ComputeHash(Encoding.ASCII.GetBytes(pass))
+            Dim sourceArray As Byte() = provider.ComputeHash(Encoding.ASCII.GetBytes(PassCode))
             Array.Copy(sourceArray, 0, destinationArray, 0, &H10)
             Array.Copy(sourceArray, 0, destinationArray, 15, &H10)
             managed.Key = destinationArray
@@ -25,12 +27,12 @@ Module Criptography
         Return Nothing
     End Function
 
-    Public Function AES_Encrypt(input As String, pass As String) As String
+    Public Function AESEncrypt(input As String) As String
         Dim managed As New RijndaelManaged
         Dim provider As New MD5CryptoServiceProvider
         Try
             Dim destinationArray As Byte() = New Byte(&H20 - 1) {}
-            Dim sourceArray As Byte() = provider.ComputeHash(Encoding.ASCII.GetBytes(pass))
+            Dim sourceArray As Byte() = provider.ComputeHash(Encoding.ASCII.GetBytes(PassCode))
             Array.Copy(sourceArray, 0, destinationArray, 0, &H10)
             Array.Copy(sourceArray, 0, destinationArray, 15, &H10)
             managed.Key = destinationArray
