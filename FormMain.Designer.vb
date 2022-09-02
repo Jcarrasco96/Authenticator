@@ -151,20 +151,20 @@ Partial Class FormMain
         '
         Me.progressTime.BackColor = System.Drawing.Color.Transparent
         Me.progressTime.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.progressTime.BaseColour = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.progressTime.BaseColour = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.progressTime.BorderColour = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer), CType(CType(28, Byte), Integer))
         Me.progressTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.progressTime.Location = New System.Drawing.Point(236, 83)
         Me.progressTime.Maximum = 30
         Me.progressTime.Name = "progressTime"
-        Me.progressTime.ProgressColour = System.Drawing.Color.Turquoise
+        Me.progressTime.ProgressColour = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(161, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.progressTime.RotationAngle = 360
         Me.progressTime.Size = New System.Drawing.Size(32, 32)
         Me.progressTime.StartingAngle = 360
         Me.progressTime.TabIndex = 19
         Me.progressTime.TabStop = False
         Me.progressTime.Text = "ProgressBar1"
-        Me.progressTime.TextColour = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(153, Byte), Integer))
+        Me.progressTime.TextColour = System.Drawing.Color.White
         Me.tt.SetToolTip(Me.progressTime, "Time to restart the code")
         Me.progressTime.Value = 30
         '

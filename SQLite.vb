@@ -6,144 +6,123 @@ Module SQLite
     Public Const FILENAME As String = "Authenticator.sqlite"
     Private Const DataSource As String = "Data Source=" & FILENAME & "; Version=3; Compress=True"
 
-    Dim SQLconnect As SQLiteConnection
-    Dim SQLcommand As SQLiteCommand
+    Public Function CheckName(name As String) As Boolean
+        Dim SQLconnect As SQLiteConnection
 
-    Public Function CheckName(Name As String) As Boolean
         Try
             SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
             }
-            Using Query As New SQLiteCommand()
-                SQLconnect.Open()
-                With Query
-                    .Connection = SQLconnect
-                    .CommandText = "SELECT * FROM Secure_Auth WHERE Name = @user"
-                    .Parameters.AddWithValue("@user", Name)
-                    .Prepare()
-                End With
+            SQLconnect.Open()
 
-                Dim Reader As SQLiteDataReader = Query.ExecuteReader
+            Dim SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "SELECT * FROM AuthorizationCode WHERE Name = '" & name & "'"
 
-                If Reader.HasRows Then
-                    Query.Parameters.Clear()
-                    Reader.Close()
-                    SQLconnect.Close()
-                    Return True
-                Else
-                    Query.Parameters.Clear()
-                    Reader.Close()
-                    SQLconnect.Close()
-                    Return False
-                End If
-            End Using
-        Catch
-            SQLconnect.Close()
+            Dim reader = SQLcommand.ExecuteReader
+
+            If reader.HasRows Then
+                reader.Close()
+                SQLconnect.Close()
+                Return True
+            Else
+                reader.Close()
+                SQLconnect.Close()
+                Return False
+            End If
+        Catch e As Exception
+            MsgBox("Check name fail: " & e.Message)
             Return False
         End Try
     End Function
 
     Public Function InsertCode(Name As String, Code As String, Optional Period As Integer = 30) As Boolean
         Try
-            SQLconnect = New SQLiteConnection With {
+            Dim SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
             }
             SQLconnect.Open()
 
-            SQLcommand = SQLconnect.CreateCommand
-            SQLcommand.CommandText = "INSERT INTO Secure_Auth (Name, Code, Period, Active) values ('" & Name & "','" & Code & "','" & Period & "',1)"
+            Dim SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "INSERT INTO AuthorizationCode (Name, Code, Period, Active) values ('" & Name & "','" & Code & "','" & Period & "',1)"
             SQLcommand.ExecuteNonQuery()
 
             SQLconnect.Close()
             Return True
-        Catch
+        Catch e As Exception
+            MsgBox("Insert code fail: " & e.Message)
             Return False
         End Try
     End Function
 
     Public Function UpdateName(name As String, newName As String) As Boolean
         Try
-            SQLconnect = New SQLiteConnection With {
+            Dim SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
             }
             SQLconnect.Open()
 
-            SQLcommand = SQLconnect.CreateCommand
-            SQLcommand.CommandText = "UPDATE Secure_Auth SET Name = '" & newName & "' WHERE Name = '" & name & "'"
+            Dim SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "UPDATE AuthorizationCode SET Name = '" & newName & "' WHERE Name = '" & name & "'"
             SQLcommand.ExecuteNonQuery()
 
             SQLconnect.Close()
             Return True
-        Catch
-            SQLconnect.Close()
+        Catch e As Exception
+            MsgBox("Update name fail: " & e.Message)
             Return False
         End Try
     End Function
 
     Public Function DeleteItem(name As String) As Boolean
         Try
-            SQLconnect = New SQLiteConnection With {
+            Dim SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
             }
             SQLconnect.Open()
 
-            SQLcommand = SQLconnect.CreateCommand
-            SQLcommand.CommandText = "DELETE FROM Secure_Auth WHERE Name = '" & name & "'"
+            Dim SQLcommand = SQLconnect.CreateCommand
+            SQLcommand.CommandText = "DELETE FROM AuthorizationCode WHERE Name = '" & name & "'"
             SQLcommand.ExecuteNonQuery()
 
             SQLconnect.Close()
             Return True
-        Catch
-            SQLconnect.Close()
+        Catch e As Exception
+            MsgBox("Delete item fail: " & e.Message)
             Return False
         End Try
     End Function
 
-    Public Function LoadCode() As Boolean
-        Try
-            FormMain.panelCodes.Controls.Clear()
+    Public Function GetCodes() As List(Of NumCodes)
+        Dim arrRet As New List(Of NumCodes)
 
-            SQLconnect = New SQLiteConnection With {
+        Try
+            Dim SQLconnect = New SQLiteConnection With {
                 .ConnectionString = DataSource
             }
             SQLconnect.Open()
 
-            SQLcommand = SQLconnect.CreateCommand
-
-            Dim sadapter As New SQLiteDataAdapter
+            Dim sadapter As New SQLiteDataAdapter("SELECT * FROM AuthorizationCode", SQLconnect)
             Dim sqltable As New DataTable
 
-            With SQLcommand
-                .CommandText = "SELECT * FROM Secure_Auth"
-                .Connection = SQLconnect
-            End With
-            With sadapter
-                .SelectCommand = SQLcommand
-                .Fill(sqltable)
-            End With
+            sadapter.Fill(sqltable)
 
             For i As Integer = 0 To sqltable.Rows.Count - 1
                 Dim row = sqltable.Rows(i)
 
-                Dim Name As String = row("Name")
-                Dim SecretKey As String = row("Code")
-                Dim Period As String = row("Period")
-                Dim Active As Integer = row("Active")
+                Dim name As String = row("Name")
+                Dim secretKey As String = row("Code")
+                Dim period As Integer = row("Period")
+                Dim active As Integer = row("Active")
 
-                If Active = 0 Then Continue For
-
-                Dim otp = CalculateOTP(SecretKey)
-
-                FormMain.Add(Name, otp)
+                arrRet.Add(New NumCodes(name, secretKey, period, active))
             Next
 
             SQLconnect.Close()
-            Return True
         Catch e As Exception
-            Debug.WriteLine(e.ToString)
-            SQLconnect.Close()
-            Return False
+            MsgBox("Load codes fail: " & e.Message)
         End Try
+
+        Return arrRet
     End Function
 
     Public Function CreateDB() As Boolean
@@ -153,14 +132,16 @@ Module SQLite
             Else
                 SQLiteConnection.CreateFile(FILENAME)
 
-                SQLconnect = New SQLiteConnection With {
+                Dim SQLconnect = New SQLiteConnection With {
                     .ConnectionString = DataSource
                 }
 
                 SQLconnect.Open()
-                SQLcommand = SQLconnect.CreateCommand
-                SQLcommand.CommandText = "CREATE TABLE Secure_Auth (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Code TEXT, Period TEXT, Active INTEGER);"
+
+                Dim SQLcommand = SQLconnect.CreateCommand
+                SQLcommand.CommandText = "CREATE TABLE AuthorizationCode (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Code TEXT, Period TEXT, Active INTEGER);"
                 SQLcommand.ExecuteNonQuery()
+
                 SQLconnect.Close()
                 Return True
             End If

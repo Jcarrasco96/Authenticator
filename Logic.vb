@@ -1,6 +1,4 @@
-﻿Imports System.Security.Cryptography
-
-Module Logic
+﻿Module Logic
 
     Sub MSG(message As String, Optional type As Byte = Nothing)
         Dim alertStyle As MsgBoxStyle
@@ -31,16 +29,5 @@ Module Logic
         Dim intervals = secondsNow \ 30
         Return 30 - (secondsNow - (intervals * 30))
     End Function
-
-    Function CalculateOTP(secretKey As String) As String
-        Dim timestamp As Long = GetUnixTimestamp() / 30
-        Dim data As Byte() = BitConverter.GetBytes(timestamp).Reverse.ToArray
-        Dim hmac As Byte() = New HMACSHA1(secretKey.ToByteArray).ComputeHash(data)
-        Dim offset As Integer = hmac.Last And &HF
-        Dim otp As Integer = (((hmac(offset + 0) And &H7F) << 24) Or ((hmac(offset + 1) And &HFF) << 16) Or ((hmac(offset + 2) And &HFF) << 8) Or (hmac(offset + 3) And &HFF)) Mod 1000000
-
-        Return otp.ToString("000000")
-    End Function
-
 
 End Module

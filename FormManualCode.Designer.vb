@@ -48,7 +48,8 @@ Partial Class FormManualCode
         Me.MysticTheme1.Movible = True
         Me.MysticTheme1.Name = "MysticTheme1"
         Me.MysticTheme1.Size = New System.Drawing.Size(350, 215)
-        Me.MysticTheme1.TabIndex = 6
+        Me.MysticTheme1.TabIndex = 0
+        Me.MysticTheme1.TabStop = False
         Me.MysticTheme1.Text = "Insertar nuevo codigo"
         '
         'btnCancel
@@ -147,7 +148,7 @@ Partial Class FormManualCode
         Me.MinimizeBox = False
         Me.Name = "FormManualCode"
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Manual Private Code."
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

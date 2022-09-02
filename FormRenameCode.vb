@@ -18,15 +18,17 @@
         End If
 
         If CheckName(txtName.Text) Then
-            MSG("Este nombre esta en uso, escoge otro")
+            MSG("Este nombre esta en uso, escoja otro")
         Else
             UpdateName(Names, txtName.Text)
-            LoadCode()
+
+            DialogResult = DialogResult.OK
             Dispose()
         End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        DialogResult = DialogResult.Cancel
         Dispose()
     End Sub
 

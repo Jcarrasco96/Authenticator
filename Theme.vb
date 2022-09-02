@@ -503,146 +503,6 @@ Class ProgressB : Inherits ProgressBar
 
 End Class
 
-Public Class ThirteenTabControl : Inherits TabControl
-
-    Private ReadOnly AccentColor As Color = Color.FromArgb(33, 189, 255)
-    Private ReadOnly MainColor As Color = Color.FromArgb(35, 35, 35)
-
-    Sub New()
-        MyBase.New()
-        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
-        SetStyle(ControlStyles.ResizeRedraw, True)
-        SetStyle(ControlStyles.UserPaint, True)
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        DoubleBuffered = True
-
-        BackColor = Color.FromArgb(250, 50, 50)
-        ForeColor = Color.Black
-    End Sub
-
-    Protected Overrides Sub OnPaint(e As PaintEventArgs)
-        Dim B As New Bitmap(Width, Height)
-        Dim G As Graphics = Graphics.FromImage(B)
-        MyBase.OnPaint(e)
-
-        Try : SelectedTab.BackColor = MainColor : Catch : End Try
-        G.Clear(Color.FromArgb(44, 51, 62))
-
-        Dim sf As New StringFormat With {
-            .LineAlignment = StringAlignment.Center,
-            .Alignment = StringAlignment.Center
-        }
-
-        For i As Integer = 0 To TabPages.Count - 1
-            If Not i = SelectedIndex Then
-                Dim TabRect As New Rectangle(GetTabRect(i).X, GetTabRect(i).Y, GetTabRect(i).Width, GetTabRect(i).Height)
-                G.FillRectangle(New SolidBrush(MainColor), TabRect)
-                G.DrawString(TabPages(i).Text, New Font("Segoe UI", 9.75F), New SolidBrush(ForeColor), TabRect, sf)
-            End If
-        Next
-
-        G.FillRectangle(New SolidBrush(MainColor), 0, ItemSize.Height, Width, Height)
-
-        If Not SelectedIndex = -1 Then
-            Dim TabRect As New Rectangle(GetTabRect(SelectedIndex).X - 2, GetTabRect(SelectedIndex).Y, GetTabRect(SelectedIndex).Width + 4, GetTabRect(SelectedIndex).Height)
-            G.FillRectangle(New SolidBrush(AccentColor), TabRect)
-            G.DrawString(TabPages(SelectedIndex).Text, New Font("Segoe UI", 9.75F), New SolidBrush(ForeColor), TabRect, sf)
-        End If
-
-        e.Graphics.DrawImage(B, New Point(0, 0))
-        G.Dispose() : B.Dispose()
-    End Sub
-End Class
-
-Public Class ThirteenComboBox : Inherits ComboBox
-#Region " Control Help - Properties & Flicker Control "
-    Private _AccentColor As Color
-    Public Property AccentColor() As Color
-        Get
-            Return _AccentColor
-        End Get
-        Set(value As Color)
-            _AccentColor = value
-            Invalidate()
-        End Set
-    End Property
-
-    Private _StartIndex As Integer = 0
-    Private Property StartIndex As Integer
-        Get
-            Return _StartIndex
-        End Get
-        Set(value As Integer)
-            _StartIndex = value
-            Try
-                SelectedIndex = value
-            Catch
-            End Try
-            Invalidate()
-        End Set
-    End Property
-    Sub ReplaceItem(sender As Object, e As DrawItemEventArgs) Handles Me.DrawItem
-        e.DrawBackground()
-        Try
-            If (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
-                e.Graphics.FillRectangle(New SolidBrush(_AccentColor), e.Bounds)
-            Else
-                e.Graphics.FillRectangle(New SolidBrush(Color.FromArgb(35, 35, 35)), e.Bounds)
-            End If
-            e.Graphics.DrawString(GetItemText(Items(e.Index)), e.Font, Brushes.White, e.Bounds)
-        Catch
-        End Try
-    End Sub
-    Protected Sub DrawTriangle(Clr As Color, FirstPoint As Point, SecondPoint As Point, ThirdPoint As Point, G As Graphics)
-        Dim points As New List(Of Point) From {
-            FirstPoint,
-            SecondPoint,
-            ThirdPoint
-        }
-        G.FillPolygon(New SolidBrush(Clr), points.ToArray())
-    End Sub
-
-#End Region
-
-    Sub New()
-        MyBase.New()
-        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
-        SetStyle(ControlStyles.ResizeRedraw, True)
-        SetStyle(ControlStyles.UserPaint, True)
-        SetStyle(ControlStyles.DoubleBuffer, True)
-        SetStyle(ControlStyles.SupportsTransparentBackColor, True)
-        DrawMode = DrawMode.OwnerDrawFixed
-        BackColor = Color.FromArgb(50, 50, 50)
-        ForeColor = Color.White
-        AccentColor = Color.DodgerBlue
-        DropDownStyle = ComboBoxStyle.DropDownList
-        Font = New Font("Segoe UI Semilight", 9.75F)
-        StartIndex = 0
-        DoubleBuffered = True
-    End Sub
-
-    Protected Overrides Sub OnPaint(e As PaintEventArgs)
-        Dim B As New Bitmap(Width, Height)
-        Dim G As Graphics = Graphics.FromImage(B)
-
-        G.SmoothingMode = SmoothingMode.HighQuality
-
-        G.Clear(Color.FromArgb(50, 50, 50))
-        G.DrawLine(New Pen(Color.White, 2), New Point(Width - 18, 10), New Point(Width - 14, 14))
-        G.DrawLine(New Pen(Color.White, 2), New Point(Width - 14, 14), New Point(Width - 10, 10))
-        G.DrawLine(New Pen(Color.White), New Point(Width - 14, 15), New Point(Width - 14, 14))
-        G.DrawRectangle(New Pen(Color.FromArgb(100, 100, 100)), New Rectangle(0, 0, Width - 1, Height - 1))
-
-        Try
-            G.DrawString(Text, Font, Brushes.White, New Rectangle(7, 0, Width - 1, Height - 1), New StringFormat With {.LineAlignment = StringAlignment.Center, .Alignment = StringAlignment.Near})
-        Catch
-        End Try
-
-        e.Graphics.DrawImage(B.Clone(), 0, 0)
-        G.Dispose() : B.Dispose()
-    End Sub
-End Class
-
 Public Class MyControl : Inherits Control
 
 #Region " Declarations "
@@ -676,7 +536,6 @@ Public Class MyControl : Inherits Control
 #End Region
 
 End Class
-
 
 Public Class VisualStudioRadialProgressBar
     Inherits Control
@@ -722,7 +581,6 @@ Public Class VisualStudioRadialProgressBar
                     Invalidate()
             End Select
         End Get
-
         Set(V As Integer)
             Select Case V
                 Case Is > _Maximum
@@ -757,7 +615,6 @@ Public Class VisualStudioRadialProgressBar
         Set(value As Color)
             _TextColour = value
             Invalidate()
-
         End Set
     End Property
 
@@ -769,7 +626,6 @@ Public Class VisualStudioRadialProgressBar
         Set(value As Color)
             _ProgressColour = value
             Invalidate()
-
         End Set
     End Property
 
@@ -781,7 +637,6 @@ Public Class VisualStudioRadialProgressBar
         Set(value As Color)
             _BaseColour = value
             Invalidate()
-
         End Set
     End Property
 
@@ -827,17 +682,17 @@ Public Class VisualStudioRadialProgressBar
                 Case 0
                     .DrawArc(New Pen(New SolidBrush(_BorderColour), 1 + 6), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle - 3, _RotationAngle + 5)
                     .DrawArc(New Pen(New SolidBrush(_BaseColour), 1 + 3), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle, _RotationAngle)
-                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(CInt(Width / 2), CInt(Height / 2)), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
+                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(Width / 2, Height / 2), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
                 Case _Maximum
                     .DrawArc(New Pen(New SolidBrush(_BorderColour), 1 + 6), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle - 3, _RotationAngle + 5)
                     .DrawArc(New Pen(New SolidBrush(_BaseColour), 1 + 3), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle, _RotationAngle)
                     .DrawArc(New Pen(New SolidBrush(_ProgressColour), 1 + 3), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle, _RotationAngle)
-                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(CInt(Width / 2), CInt(Height / 2)), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
+                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(Width / 2, Height / 2), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
                 Case Else
                     .DrawArc(New Pen(New SolidBrush(_BorderColour), 1 + 6), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle - 3, _RotationAngle + 5)
                     .DrawArc(New Pen(New SolidBrush(_BaseColour), 1 + 3), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle, _RotationAngle)
                     .DrawArc(New Pen(New SolidBrush(_ProgressColour), 1 + 3), CInt(3 / 2) + 1, CInt(3 / 2) + 1, Width - 3 - 4, Height - 3 - 3, _StartingAngle, CInt((_RotationAngle / _Maximum) * _Value))
-                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(CInt(Width / 2), CInt(Height / 2)), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
+                    .DrawString(_Value, _Font, New SolidBrush(_TextColour), New Point(Width / 2, Height / 2), New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
             End Select
         End With
         MyBase.OnPaint(e)

@@ -1,32 +1,40 @@
 ﻿Public Class FormManualCode
 
-    Public _Result As String
-    ReadOnly Property ResultCaptcha() As String
-        Get
-            Return _Result
-        End Get
-    End Property
-
-    Private Sub Insert(Name As String, Code As String)
-        _Result = "<code>" & Code & "</code><name>" & Name & "</name>"
-        txtName.Text = Nothing
-        txtCode.Text = Nothing
+    Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
         Dispose()
     End Sub
 
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
-        If txtName.Text = "" And txtCode.Text = "" Then
-        Else
-            Insert(txtName.Text, txtCode.Text)
-        End If
-    End Sub
+        Dim name As String = txtName.Text
 
-    Private Sub MysticClose1_Click(sender As Object, e As EventArgs) Handles MysticClose1.Click
-        Close()
+        If name = "" Then
+            MSG("Nombre no puede estar vacio", 2)
+            Return
+        End If
+
+        If txtCode.Text = "" Then
+            MSG("Codigo no puede estar vacio", 2)
+            Return
+        End If
+
+        Dim I As Integer = 1
+        Dim Rep As String = name
+
+        While CheckName(name)
+            name = Rep + " (" & I & ")"
+            I += 1
+        End While
+
+        If Not InsertCode(name, txtCode.Text) Then
+            MSG("Unable to insert into database, check database integrity.", 2)
+        End If
+
+        DialogResult = DialogResult.OK
+        Dispose()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        _Result = ""
+        DialogResult = DialogResult.Cancel
         Dispose()
     End Sub
 

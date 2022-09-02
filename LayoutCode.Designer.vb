@@ -36,7 +36,7 @@ Partial Class LayoutCode
         '
         resources.ApplyResources(Me.lblCode, "lblCode")
         Me.lblCode.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblCode.ForeColor = System.Drawing.Color.White
+        Me.lblCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(161, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.lblCode.Name = "lblCode"
         Me.tt.SetToolTip(Me.lblCode, resources.GetString("lblCode.ToolTip"))
         '
@@ -44,7 +44,7 @@ Partial Class LayoutCode
         '
         resources.ApplyResources(Me.lblName, "lblName")
         Me.lblName.BackColor = System.Drawing.Color.Transparent
-        Me.lblName.ForeColor = System.Drawing.Color.Turquoise
+        Me.lblName.ForeColor = System.Drawing.Color.White
         Me.lblName.Name = "lblName"
         '
         'Panel1

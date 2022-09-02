@@ -9,10 +9,7 @@ Public Class FormMain
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CreateDB()
 
-        If Not LoadCode() Then
-            MSG("Database error, correct them!", 2)
-        End If
-
+        LoadCode()
         LoadCounter()
     End Sub
 
@@ -31,34 +28,36 @@ Public Class FormMain
         timerCopied.Stop()
     End Sub
 
-    Public Sub Add(Name As String, CODIGO As String)
-        Dim newPanel As New LayoutCode With {
-            .Dock = DockStyle.Top
-        }
+    'Public Sub Add(Name As String, CODIGO As String)
+    '    Dim newPanel As New LayoutCode With {
+    '        .Dock = DockStyle.Top
+    '    }
 
-        newPanel.lblName.Text = Name
-        newPanel.lblCode.Text = CODIGO
+    '    newPanel.lblName.Text = Name
+    '    newPanel.lblCode.Text = CODIGO
 
-        AddHandler newPanel.lblCode.Click, Sub(sender, e) CodeCopied(CODIGO)
-        AddHandler newPanel.btnEdit.Click, Sub(sender, e) EditName(Name)
-        'AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(Name, CODIGO)
-        AddHandler newPanel.btnDelete.Click, Sub(sender, e) Delete(Name)
+    '    AddHandler newPanel.lblCode.Click, Sub(sender, e) CodeCopied(CODIGO)
+    '    AddHandler newPanel.btnEdit.Click, Sub(sender, e) EditName(Name)
+    '    'AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(Name, CODIGO)
+    '    AddHandler newPanel.btnDelete.Click, Sub(sender, e) Delete(Name)
 
-        panelCodes.Controls.Add(newPanel)
-        panelCodes.Select()
+    '    panelCodes.Controls.Add(newPanel)
+    '    panelCodes.Select()
 
-        timerCount.Start()
-    End Sub
+    '    timerCount.Start()
+    'End Sub
 
     Private Sub EditName(name As String)
-        If Application.OpenForms.OfType(Of FormRenameCode)().Count() > 0 Then
-            FormRenameCode.WindowState = FormWindowState.Normal
-        Else
-            Dim Renam As New FormRenameCode With {
-                .Names = name
-            }
-            Renam.SetName()
-            Renam.Show()
+        Dim Renam As New FormRenameCode With {
+            .Names = name
+        }
+        Renam.SetName()
+
+        If Renam.ShowDialog() = DialogResult.OK Then
+            Show()
+
+            LoadCode()
+            LoadCounter()
         End If
     End Sub
 
@@ -104,49 +103,11 @@ Public Class FormMain
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If Application.OpenForms.OfType(Of FormManualCode)().Count() > 0 Then
-            FormManualCode.WindowState = FormWindowState.Normal
-        Else
-            FormManualCode.ShowDialog()
-
+        If FormManualCode.ShowDialog() = DialogResult.OK Then
             Show()
 
-            If FormManualCode.ResultCaptcha <> "" Then
-                Dim Nom As New Regex("(?<=<name>).+(?=</name>)")
-                Dim Nome As String = Nom.Match(FormManualCode.ResultCaptcha).Value
-
-                Dim Cod As New Regex("(?<=<code>).+(?=</code>)")
-                Dim Codigo As String = Cod.Match(FormManualCode.ResultCaptcha).Value
-
-                If Nome = "" Then
-                    MSG("Nombre no puede estar vacio", 2)
-                    FormManualCode._Result = Nothing
-                    Return
-                End If
-
-                If Codigo = "" Then
-                    MSG("Codigo no puede estar vacio", 2)
-                    FormManualCode._Result = Nothing
-                    Return
-                End If
-
-                Dim I As Integer = 1
-                Dim Rep As String = Nome
-
-                While CheckName(Nome)
-                    Nome = Rep + " (" & I & ")"
-                    I += 1
-                End While
-
-                If InsertCode(Nome, Codigo) Then
-                    FormManualCode._Result = Nothing
-                Else
-                    MSG("Unable to insert into database, check database integrity.", 2)
-                End If
-
-                LoadCode()
-                LoadCounter()
-            End If
+            LoadCode()
+            LoadCounter()
         End If
     End Sub
 
@@ -164,6 +125,33 @@ Public Class FormMain
 
     Private Sub btnInfo_Click(sender As Object, e As EventArgs) Handles btnInfo.Click
         MSG("Desarrollado por Jesus Carrasco", 1)
+    End Sub
+
+    Private Sub LoadCode()
+        Dim arrCodes = GetCodes()
+
+        panelCodes.Controls.Clear()
+
+        If arrCodes.Count = 0 Then
+
+        Else
+            For Each numCode As NumCodes In arrCodes
+                Dim newPanel As New LayoutCode With {
+                    .Dock = DockStyle.Top
+                }
+
+                newPanel.lblName.Text = numCode.Name
+                newPanel.lblCode.Text = numCode.OTP
+
+                AddHandler newPanel.lblCode.Click, Sub(sender, e) CodeCopied(numCode.OTP)
+                AddHandler newPanel.btnEdit.Click, Sub(sender, e) EditName(numCode.Name)
+                'AddHandler newPanel.btnQr.Click, Sub(sender, e) QRCode(numCode.Name, numCode.OTP)
+                AddHandler newPanel.btnDelete.Click, Sub(sender, e) Delete(numCode.Name)
+
+                panelCodes.Controls.Add(newPanel)
+                panelCodes.Select()
+            Next
+        End If
     End Sub
 
 End Class
